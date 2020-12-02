@@ -322,10 +322,7 @@ public:
    * progress and 1 meaning the filter has completed execution.
    */
   virtual float
-  GetProgress() const
-  {
-    return progressFixedToFloat(m_Progress);
-  }
+  GetProgress() const;
 
   /** \brief Update the progress of the process object.
    *
@@ -422,8 +419,7 @@ public:
    * region.
    */
   virtual void
-  EnlargeOutputRequestedRegion(DataObject * itkNotUsed(output))
-  {}
+  EnlargeOutputRequestedRegion(DataObject * itkNotUsed(output));
 
   /** \brief Reset the pipeline.
    *
@@ -463,15 +459,9 @@ public:
   virtual bool
   GetReleaseDataFlag() const;
   void
-  ReleaseDataFlagOn()
-  {
-    this->SetReleaseDataFlag(true);
-  }
+  ReleaseDataFlagOn();
   void
-  ReleaseDataFlagOff()
-  {
-    this->SetReleaseDataFlag(false);
-  }
+  ReleaseDataFlagOff();
 
   /** Turn on/off the flags to control whether the bulk data belonging
    * to the outputs of this ProcessObject are released/reallocated
@@ -725,15 +715,9 @@ protected:
 
   /** Return the main output */
   DataObject *
-  GetPrimaryOutput()
-  {
-    return m_IndexedOutputs[0]->second;
-  }
+  GetPrimaryOutput();
   const DataObject *
-  GetPrimaryOutput() const
-  {
-    return m_IndexedOutputs[0]->second;
-  }
+  GetPrimaryOutput() const;
 
   /** Set the main output */
   virtual void

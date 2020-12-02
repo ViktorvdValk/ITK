@@ -397,6 +397,20 @@ ProcessObject::RemoveOutput(const DataObjectIdentifierType & key)
   }
 }
 
+/** Return the main output */
+
+DataObject *
+ProcessObject::GetPrimaryOutput()
+{
+  return m_IndexedOutputs[0]->second;
+}
+
+const DataObject *
+ProcessObject::GetPrimaryOutput() const
+{
+  return m_IndexedOutputs[0]->second;
+}
+
 
 void
 ProcessObject::RemoveOutput(DataObjectPointerArraySizeType idx)
@@ -1141,6 +1155,18 @@ ProcessObject::IsIndexedOutputName(const DataObjectIdentifierType & name) const
 }
 
 
+/** \brief Get the execution progress of a process object.
+ *
+ * The progress is a floating number in [0,1] with 0 meaning no
+ * progress and 1 meaning the filter has completed execution.
+ */
+
+float
+ProcessObject::GetProgress() const
+{
+  return progressFixedToFloat(m_Progress);
+}
+
 void
 ProcessObject::UpdateProgress(float progress)
 {
@@ -1182,6 +1208,18 @@ ProcessObject::GetReleaseDataFlag() const
     return this->GetPrimaryOutput()->GetReleaseDataFlag();
   }
   return false;
+}
+
+void
+ProcessObject::ReleaseDataFlagOn()
+{
+  this->SetReleaseDataFlag(true);
+}
+
+void
+ProcessObject::ReleaseDataFlagOff()
+{
+  this->SetReleaseDataFlag(false);
 }
 
 
@@ -1287,6 +1325,20 @@ ProcessObject::Update()
   }
 }
 
+
+/** Give the process object a chance to indicate that it will produce more
+ * output than it was requested to produce. For example, many imaging
+ * filters must compute the entire output at once or can only produce output
+ * in complete slices. Such filters cannot handle smaller requested regions.
+ * These filters must provide an implementation of this method, setting
+ * the output requested region to the size they will produce.  By default,
+ * a process object does not modify the size of the output requested
+ * region.
+ */
+
+void
+ProcessObject::EnlargeOutputRequestedRegion(DataObject * itkNotUsed)
+{}
 
 void
 ProcessObject::ResetPipeline()
