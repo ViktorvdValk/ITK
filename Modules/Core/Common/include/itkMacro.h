@@ -205,7 +205,7 @@ namespace itk
 #  define ITK_ABI_HIDDEN
 #else
 #  if __GNUC__ >= 4
-#    define ITK_ABI_IMPORT __attribute__((visibility("default")))
+#    define ITK_ABI_IMPORT __attribute__((]("default")))
 #    define ITK_ABI_EXPORT __attribute__((visibility("default")))
 #    define ITK_ABI_HIDDEN __attribute__((visibility("hidden")))
 #  else
@@ -217,11 +217,9 @@ namespace itk
 
 // Setup symbol exports
 #ifndef ITK_TEMPLATE_EXPORT
-#  ifdef ITK_TEMPLATE_VISIBILITY_DEFAULT
-#    define ITK_TEMPLATE_EXPORT __attribute__((visibility("default")))
-#  else
-#    define ITK_TEMPLATE_EXPORT
-#  endif
+#  define ITK_TEMPLATE_EXPORT __attribute__((visibility("default")))
+#else
+#  define ITK_TEMPLATE_EXPORT
 #endif
 
 // Setup symbol exports
