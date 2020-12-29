@@ -38,8 +38,8 @@
 namespace itk
 {
 // Forward reference because of circular dependencies
-class ITK_FORWARD_EXPORT ProcessObject;
-class ITK_FORWARD_EXPORT DataObject;
+class ITK_TEMPLATE_EXPORT ProcessObject;
+class ITK_TEMPLATE_EXPORT DataObject;
 
 /*--------------------Data Object Exceptions---------------------------*/
 
